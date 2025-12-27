@@ -1,53 +1,22 @@
-//@ pragma Env QS_NO_RELOAD_POPUP=1
-
 import Quickshell
-import qs.modules.bar
-import qs.modules.launcher
-import qs.modules.settingsWindow
-import qs.modules.controlCenter
-import qs.modules.onScreenDisplays
-import qs.modules.clipHistory
-import qs.modules.wallpaper
-import qs.modules.lockscreen
-import qs.settings
+import Quickshell.Wayland
+import Quickshell.Io
+import Quickshell.Hyprland
+import QtQuick
+import QtQuick.Layouts
+import Quickshell.Services.Notifications
 
-Scope {
-    Wallpaper {}
-    LazyLoader {
-        active: Config.showSplashOnWallpaper
-        Splash {}
-    }
+
+ShellRoot {
+    id: root
     
-    LazyLoader {
-        active: AppState.barVisible
-        Bar {}
+    // Import modules
+    Loader {
+        source: "bar.qml"
+        active: true
     }
-    LazyLoader {
-        active: AppState.settingsWindowVisible
-        SettingsWindow {}
-    }
-    LazyLoader {
-        active: AppState.launcherVisible
-        Launcher {}
-    }
-    LazyLoader {
-        active: AppState.clipHistVisible
-        ClipHistory {}
-    }
-    LazyLoader {
-        active: AppState.controlCenterVisible
-        ControlCenter {}
-    }
-    LazyLoader {
-        active: AppState.preLockOverlayVisible
-        LockscreenOverlay {}
-    }
-    LazyLoader {
-        active: AppState.lockscreenVisible
-        Lock {}
-    }
-
-    // Notification popup - always active to receive notifications
-    NotificationPopup {}
-    ReloadPopup {}
+   /* Loader{
+    	source: "notif.qml"
+    	active: true
+    }*/
 }
